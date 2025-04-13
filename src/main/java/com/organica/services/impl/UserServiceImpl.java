@@ -16,9 +16,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -31,6 +33,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepo userRepo;
+
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -70,4 +73,6 @@ public class UserServiceImpl implements UserService {
 
         return new SignInResponse(jwtToken, user.getEmail(), user.getName(), role);
     }
+
+
 }

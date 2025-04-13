@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/auth")
@@ -28,4 +30,6 @@ public class UserController {
         SignInResponse signInResponse = this.userService.signIn(signIn);
         return new ResponseEntity<>(signInResponse, HttpStatusCode.valueOf(200));
     }
+
+
 }

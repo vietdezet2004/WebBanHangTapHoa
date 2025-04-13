@@ -1,85 +1,260 @@
+/* === VARIABLES === */
+:root {
+  --primary-color: #2e7d32;
+  --primary-dark: #1b5e20;
+  --primary-light: #4caf50;
+  --accent-color: #ff6f00;
+  --text-light: #ffffff;
+  --text-dark: #263238;
+  --background-dark: #1c2a25;
+  --background-light: #ffffff;
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-medium: 0 6px 16px rgba(0, 0, 0, 0.12);
+  --transition-speed: 0.3s;
+  --border-radius: 8px;
+}
+
+/* === HEADER CONTAINER === */
 .header-container {
-  background-color: #2e7d32; /* xanh lá */
-  color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 24px;
+  background: linear-gradient(to right, var(--background-dark), #2a3c33);
+  padding: 15px 40px;
+  box-shadow: var(--shadow-medium);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
+/* === LOGO SECTION === */
 .header-logo {
   display: flex;
   align-items: center;
-  font-size: 20px;
-  font-weight: bold;
 }
 
 .logo-link {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: white;
+  color: var(--text-light);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+  transition: all var(--transition-speed) ease;
 }
 
-/* Định dạng ảnh logo, thay thế inline style */
+.logo-link:hover {
+  transform: scale(1.03);
+}
+
 .logo-link img {
-  width: 40px;
-  height: auto;
-  margin-right: 8px;
+  height: 48px;
+  margin-right: 15px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* === SEARCH BAR === */
+.header-search {
+  flex: 1;
+  margin: 0 40px;
+  display: flex;
+  align-items: center;
+  max-width: 600px;
 }
 
 .header-search input {
-  width: 500px;       /* Tăng chiều rộng */
-  padding: 6px 12px; /* Tăng khoảng đệm */
-  font-size: 16px;    /* Tăng kích thước chữ */
-  border-radius: 6px;
-  border: none;
-  outline: none;
+  width: 100%;
+  padding: 12px 20px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--text-light);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: all var(--transition-speed) ease;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.header-search input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.header-search input:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  background-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
 
 .header-search button {
-  margin-left: 8px;
-  padding: 6px 12px;
-  background-color: #ffffff;
-  color: #2e7d32;
+  margin-left: 12px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 6px;
+  background: var(--primary-color);
+  color: var(--text-light);
+  border-radius: var(--border-radius);
   cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all var(--transition-speed) ease;
+  box-shadow: var(--shadow-soft);
 }
 
+.header-search button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+/* === HEADER LINKS === */
 .header-links {
   display: flex;
-  gap: 12px;
   align-items: center;
 }
 
 .header-button {
-  background-color: #ffffff;
-  color: #2e7d32;
-  padding: 6px 12px;
-  border-radius: 6px;
+  margin-left: 16px;
+  border-radius: var(--border-radius);
   text-decoration: none;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
+  color: var(--text-light);
+  padding: 10px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all var(--transition-speed) ease;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.3px;
 }
 
 .header-button:hover {
-  background-color: #c8e6c9;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
 }
 
+/* === USER DROPDOWN === */
 .user-dropdown {
   position: relative;
 }
 
+.user-dropdown button {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--border-radius);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: var(--text-light);
+  padding: 10px 18px;
+  transition: all var(--transition-speed) ease;
+}
+
+.user-dropdown button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.user-dropdown button svg, 
+.user-dropdown button i {
+  margin-right: 8px;
+  font-size: 1.2rem;
+}
+
+/* === DROPDOWN MENU === */
 .dropdown-menu {
   position: absolute;
+  top: calc(100% + 10px);
   right: 0;
-  top: 110%;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  background: var(--background-light);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-medium);
   padding: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 1000;
+  min-width: 220px;
+  transform-origin: top right;
+  animation: dropdownAnimation 0.25s ease;
+  border: none;
+}
+
+@keyframes dropdownAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: 20px;
+  width: 16px;
+  height: 16px;
+  background: var(--background-light);
+  transform: rotate(45deg);
+  box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.04);
+}
+
+.dropdown-menu a,
+.dropdown-menu button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 16px;
+  margin: 4px 0;
+  text-align: left;
+  background: none;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+  background-color: rgba(46, 125, 50, 0.08);
+  color: var(--primary-dark);
+}
+
+.dropdown-menu a:active,
+.dropdown-menu button:active {
+  transform: scale(0.98);
+}
+
+/* Optional: Add divider between menu items */
+.dropdown-menu hr {
+  border: none;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.08);
+  margin: 8px 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .header-container {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+  }
+  
+  .header-search {
+    order: 3;
+    margin: 12px 0 0;
+    flex-basis: 100%;
+    max-width: none;
+  }
+
+  .header-button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
 }

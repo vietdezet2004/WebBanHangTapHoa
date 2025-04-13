@@ -1,27 +1,57 @@
 /* Sidebar.css */
 
+/* Kế thừa các biến từ header */
+:root {
+  --primary-color: #2e7d32;
+  --primary-dark: #1b5e20;
+  --primary-light: #4caf50;
+  --accent-color: #ff6f00;
+  --text-light: #ffffff;
+  --text-dark: #263238;
+  --background-dark: #1c2a25;
+  --background-light: #ffffff;
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-medium: 0 6px 16px rgba(0, 0, 0, 0.12);
+  --transition-speed: 0.3s;
+  --border-radius: 8px;
+}
+
 .sidebar-container {
-  background: #2e7d32;
-  padding: 20px;
+  background: linear-gradient(to bottom, var(--background-dark), #2a3c33);
+  padding: 22px;
   max-width: 250px;
   width: auto;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(147, 146, 146, 0.3);
-  font-family: 'Helvetica Neue', sans-serif;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-medium);
+  font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
   margin: 10px;
-  display: inline-block; /* Giúp chiều cao chỉ bằng nội dung */
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--primary-light);
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
 .sidebar-container h3 {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   margin-top: 0;
-  margin-bottom: 16px;
-  color: #ffffff;
+  margin-bottom: 20px;
+  color: var(--text-light);
   text-align: center;
-  border-bottom: 1px solid #444;
-  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  font-weight: 600;
 }
 
 .sidebar-container ul {
@@ -32,17 +62,97 @@
 
 .sidebar-container li {
   padding: 12px 16px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  color: #000;
-  background: #fff;
+  margin-bottom: 12px;
+  border-radius: var(--border-radius);
+  transition: all var(--transition-speed) ease;
+  color: var(--text-dark);
+  background: rgba(255, 255, 255, 0.95);
   font-size: 0.95rem;
   cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.sidebar-container li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--primary-color);
+  opacity: 0;
+  transition: all var(--transition-speed) ease;
 }
 
 .sidebar-container li:hover {
-  background: #f26722;
-  color: #fff;
   transform: translateX(6px);
+  background: var(--background-light);
+  color: var(--primary-dark);
+  box-shadow: var(--shadow-medium);
+}
+
+.sidebar-container li:hover::before {
+  opacity: 1;
+}
+
+.sidebar-container li:active {
+  transform: translateX(6px) scale(0.98);
+}
+
+.sidebar-container li.active {
+  background-color: rgba(255, 255, 255, 0.95);
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
+.sidebar-container li.active::before {
+  opacity: 1;
+  width: 6px;
+}
+
+/* Thêm biểu tượng mũi tên (tùy chọn) */
+.sidebar-container li::after {
+  content: "›";
+  position: absolute;
+  right: 16px;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all var(--transition-speed) ease;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+.sidebar-container li:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Animation cho hiệu ứng xuất hiện (tùy chọn) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sidebar-container {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar-container {
+    max-width: 100%;
+    margin: 10px 0;
+  }
 }

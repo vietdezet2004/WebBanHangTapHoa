@@ -4,20 +4,25 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // Các trang chung
 import Home from './pages/Home';
-import AdminAddProduct from './pages/AdminAddProduct';
-import AdminEditProduct from './pages/AdminEditProduct';
-import AdminProductList from './pages/AdminProductList';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
-
+import Profile from './pages/Profile';
 // Trang sản phẩm
 import ProductPage from './pages/ProductPage';
 import ProductDetail from './components/product/ProductDetail';
 
-// Trang giỏ hàng & thanh toán (THÊM MỚI)
+// Trang giỏ hàng & thanh toán
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
+import MyOrders from './pages/MyOrders';
+
+// Trang Admin (sử dụng nested routes)
+import AdminDashboard from './pages/AdminDashboard'; // Component quản lý sidebar admin và Outlet cho các trang admin con
+import AdminAddProduct from './pages/AdminAddProduct';
+import AdminEditProduct from './pages/AdminEditProduct';
+import AdminProductList from './pages/AdminProductList';
+import AdminOrderList from './pages/AdminOrderList';
 
 // Layout và PrivateRoute
 import MainLayout from './layout/MainLayout';
@@ -27,7 +32,16 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Trang chủ */}
+        <Route
+          path="/profile"
+          element={
+            <MainLayout>
+              <Profile />
+            </MainLayout>
+          }
+        />
+
+        {/* Public routes */}
         <Route
           path="/"
           element={
@@ -36,8 +50,6 @@ function App() {
             </MainLayout>
           }
         />
-
-        {/* Danh sách sản phẩm */}
         <Route
           path="/products"
           element={
@@ -46,8 +58,6 @@ function App() {
             </MainLayout>
           }
         />
-
-        {/* Chi tiết sản phẩm */}
         <Route
           path="/products/:id"
           element={
@@ -56,13 +66,9 @@ function App() {
             </MainLayout>
           }
         />
-
-        {/* Login, Register, Quên mật khẩu */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-
-        {/* Trang giỏ hàng */}
         <Route
           path="/cart"
           element={
@@ -71,8 +77,6 @@ function App() {
             </MainLayout>
           }
         />
-
-        {/* Trang thanh toán */}
         <Route
           path="/checkout"
           element={
@@ -81,42 +85,32 @@ function App() {
             </MainLayout>
           }
         />
-
-        {/* Admin - Thêm sản phẩm */}
         <Route
-          path="/admin/add-product"
+          path="/orders/my"
           element={
-            <PrivateRoute requiredRole="ADMIN">
-              <MainLayout>
-                <AdminAddProduct />
-              </MainLayout>
-            </PrivateRoute>
+            <MainLayout>
+              <MyOrders />
+            </MainLayout>
           }
         />
 
-        {/* Admin - Danh sách sản phẩm */}
+        {/* Admin routes: Đặt trong MainLayout */}
         <Route
-          path="/admin/products"
+          path="/admin/*"
           element={
-            <PrivateRoute requiredRole="ADMIN">
-              <MainLayout>
-                <AdminProductList />
-              </MainLayout>
-            </PrivateRoute>
+            <MainLayout>
+              <PrivateRoute requiredRole="ADMIN">
+                <AdminDashboard />
+              </PrivateRoute>
+            </MainLayout>
           }
-        />
-
-        {/* Admin - Sửa sản phẩm */}
-        <Route
-          path="/admin/edit-product/:id"
-          element={
-            <PrivateRoute requiredRole="ADMIN">
-              <MainLayout>
-                <AdminEditProduct />
-              </MainLayout>
-            </PrivateRoute>
-          }
-        />
+        >
+          <Route index element={<AdminProductList />} />
+          <Route path="products" element={<AdminProductList />} />
+          <Route path="add-product" element={<AdminAddProduct />} />
+          <Route path="edit-product/:id" element={<AdminEditProduct />} />
+          <Route path="orders" element={<AdminOrderList />} />
+        </Route>
       </Routes>
     </Router>
   );

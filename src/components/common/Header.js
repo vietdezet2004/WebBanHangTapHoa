@@ -1,26 +1,53 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import './Header.css';
 import logo from '../../assets/images/logo.png';
 
 function Header() {
   const [userName, setUserName] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
   useEffect(() => {
+    // Cố gắng lấy thông tin user từ localStorage key 'user'
     const userStr = localStorage.getItem('user');
     if (userStr && userStr !== 'undefined') {
       try {
         const user = JSON.parse(userStr);
         setUserName(user.Name || user.Email || 'User');
+        // Kiểm tra nếu user có Role là "ADMIN"
+        if (user.Role && user.Role.toUpperCase() === 'ADMIN') {
+          setIsAdmin(true);
+        }
       } catch (err) {
         console.error('❌ Lỗi khi parse user từ localStorage:', err);
       }
+    } else {
+      // Nếu không có thông tin user trong localStorage, kiểm tra token (nếu dùng JWT)
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const decoded = jwtDecode(token);
+          setUserName(decoded.name || decoded.sub || 'User');
+          if (
+            decoded.role &&
+            (typeof decoded.role === 'string'
+              ? decoded.role.toUpperCase() === 'ADMIN'
+              : Array.isArray(decoded.role) && decoded.role.includes('ADMIN'))
+          ) {
+            setIsAdmin(true);
+          }
+        } catch (error) {
+          console.error('Lỗi khi giải mã token:', error);
+        }
+      }
     }
 
+    // Đóng dropdown nếu click bên ngoài
     const handleClickOutside = event => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setShowDropdown(false);
@@ -86,6 +113,11 @@ function Header() {
         <Link to="/cart" className="header-button">
           Giỏ hàng
         </Link>
+        {userName && (
+          <Link to="/orders/my" className="header-button">
+            Đơn hàng
+          </Link>
+        )}
         {userName ? (
           <div className="user-dropdown" ref={dropdownRef}>
             <button
@@ -96,6 +128,14 @@ function Header() {
             </button>
             {showDropdown && (
               <div className="dropdown-menu">
+                <Link to="/profile" onClick={() => setShowDropdown(false)}>
+                  Thông tin tài khoản
+                </Link>
+                {isAdmin && (
+                  <Link to="/admin" onClick={() => setShowDropdown(false)}>
+                    Admin Dashboard
+                  </Link>
+                )}
                 <button onClick={handleLogout}>Đăng xuất</button>
               </div>
             )}

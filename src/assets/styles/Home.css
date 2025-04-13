@@ -1,0 +1,55 @@
+/* Home.css */
+
+/* Container chung cho trang Home */
+.home-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 20px auto;
+  padding: 0 20px;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* Banner */
+.banner {
+  width: 100%;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.banner-image {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+/* Phần chung của Sản phẩm nổi bật và Tất cả sản phẩm */
+.featured-section,
+.all-products-section {
+  background-color: #fbcece;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Tiêu đề của các section */
+.featured-section h2,
+.all-products-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #333;
+}
+
+/* Sử dụng CSS Grid cho danh sách sản phẩm – 5 cột cố định */
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  box-sizing: border-box;
+  max-width: 100%;
+/*  overflow-x: hidden;*/
+  margin: 0 auto; 
+}

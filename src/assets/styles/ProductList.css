@@ -1,0 +1,24 @@
+/* ProductList.css */
+
+.product-list-container {
+  padding: 1rem;
+}
+
+.product-list-title {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+/* Nếu dùng ProductList.css để thiết lập grid cho danh sách sản phẩm,
+   hãy đảm bảo rằng phần CSS này không xung đột với Home.css.
+   Nếu danh sách sản phẩm được render ở trang Home, dùng phần trong Home.css để quản lý grid.
+   Dưới đây là ví dụ nếu bạn muốn áp dụng cho ProductList trên ProductPage:
+*/
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  box-sizing: border-box;
+  max-width: 100%;
+/*  overflow-x: hidden;*/
+}

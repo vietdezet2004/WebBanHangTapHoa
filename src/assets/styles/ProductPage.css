@@ -1,0 +1,14 @@
+.product-page-container {
+    padding: 1rem;
+  }
+  
+  .search-container {
+    margin-bottom: 1rem;
+  }
+  
+  .search-container input {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+  

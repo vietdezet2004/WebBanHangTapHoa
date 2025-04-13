@@ -1,0 +1,85 @@
+.header-container {
+  background-color: #2e7d32; /* xanh lá */
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+}
+
+/* Định dạng ảnh logo, thay thế inline style */
+.logo-link img {
+  width: 40px;
+  height: auto;
+  margin-right: 8px;
+}
+
+.header-search input {
+  width: 500px;       /* Tăng chiều rộng */
+  padding: 6px 12px; /* Tăng khoảng đệm */
+  font-size: 16px;    /* Tăng kích thước chữ */
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
+
+
+.header-search button {
+  margin-left: 8px;
+  padding: 6px 12px;
+  background-color: #ffffff;
+  color: #2e7d32;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.header-links {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.header-button {
+  background-color: #ffffff;
+  color: #2e7d32;
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.header-button:hover {
+  background-color: #c8e6c9;
+}
+
+.user-dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 110%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}

@@ -1,0 +1,20 @@
+/* MainLayout.css */
+
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Để footer luôn ở cuối trang */
+}
+
+.layout-body {
+  display: flex;
+  align-items: flex-start;  /* Sidebar chỉ cao bằng nội dung của nó */
+  flex: 1; /* Chiếm toàn bộ không gian giữa header và footer */
+}
+
+.layout-content {
+  flex: 1;
+/*  overflow-y: auto; /* Cho phép nội dung cuộn theo chiều dọc */
+  padding: 1rem;
+  background-color: #fafafa;
+}
